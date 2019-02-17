@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" >
+<title>top page</title>
+</head>
+
+<style>
+hi{
+	font-size: 18pt; font-weight: bold; color: gray;
+}
+
+body {
+	font-size: 13pt; color: gray; margin: 5px 25px;
+}
+
+pre{
+	border: solid 3px #ddd; padding: 10px;
+}
+
+tr {
+	margin: 5px;
+}
+
+th {
+	padding: 5px;color: white;background: darkgray;
+}
+
+td {
+	padding: 5px;color: black;background: #f0f0f0;
+}
+</style>
+
+<body>
+
+<h1 th:text="新規ユーザー登録">Helo page</h1>
+<pre th:text="${data}"/>
+
+
+<table>
+<form method="post" action="/" th:object="${formModel}">
+
+<tr>
+	<td><label for="id">ユーザー名</label></td>
+	<td><input type="text" name="userName" th:value="*{userName}"/></td>
+</tr>
+<tr>
+	<td><label for="loginId">ログインID</label></td>
+	<td><input type="text" name="loginId" th:value="*{loginId}"/></td>
+</tr>
+<tr>
+	<td><label for="LoginPassword">ログインパスワード</label></td>
+	<td><input type="password" name="loginPassword" th:value="*{loginPassword}"/></td>
+</tr>
+<!-- <tr>
+	<td><label for="userName">メモ</label></td>
+	<td><textarea name="memo" th:text="*{userName}" cols="20" rows="5"/></td>
+</tr> -->
+<tr>
+<td></td><td><input type="submit"/></td>
+</tr>
+</form>
+
+</table>
+
+<table>
+<tr><th>ID</th><th>ログインID</th><th>ログインパスワード</th><th>ユーザー名</th></tr>
+<tr th:each="obj:${datalist}" >
+	<td th:text="${obj.id}">テスト</td>
+	<td th:text="${obj.loginId}">ログイン</td>
+	<td th:text="${obj.loginPassword}">パスワード</td>
+	<td th:text="${obj.userName}">名前</td>
+</tr>
+</table>
+
+
+
+
+</body>
+</html>
