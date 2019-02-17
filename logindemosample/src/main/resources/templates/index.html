@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns="http://www.thymeleaf.org">
 <head>
-<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" >
-<title>top page</title>
-</head>
+ <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>top page</title>
+    <!-- BootstrapのCSS読み込み -->
+    <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.min.css}" />
+    <!-- jQuery読み込み -->
+   <script type="text/javascript" th:src="@{/webjars/jquery/1.11.3/jquery.min.js}"></script>
+    <!-- BootstrapのJS読み込み -->
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
 
+</head>
+<!--
 <style>
 hi{
 	font-size: 18pt; font-weight: bold; color: gray;
@@ -29,15 +38,16 @@ th {
 td {
 	padding: 5px;color: black;background: #f0f0f0;
 }
-</style>
+</style> -->
 
 <body>
 
+<div class="container">
 <h1 th:text="新規ユーザー登録">Helo page</h1>
 <pre th:text="${data}"/>
 
 
-<table>
+ <table class="table table-striped">
 <form method="post" action="/" th:object="${formModel}">
 
 <tr>
@@ -57,13 +67,12 @@ td {
 	<td><textarea name="memo" th:text="*{userName}" cols="20" rows="5"/></td>
 </tr> -->
 <tr>
-<td></td><td><input type="submit"/></td>
+<td></td><td><input type="submit"  value="登録" class="btn btn-info"/></td>
 </tr>
 </form>
-
 </table>
 
-<table>
+ <table class="table table-striped">
 <tr><th>ID</th><th>ログインID</th><th>ログインパスワード</th><th>ユーザー名</th></tr>
 <tr th:each="obj:${datalist}" >
 	<td th:text="${obj.id}">テスト</td>
@@ -73,8 +82,7 @@ td {
 </tr>
 </table>
 
-
-
+</div>
 
 </body>
 </html>
