@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.thymeleaf.org">
+<head>
+ <meta charset="utf-8">
+<title>ユーザー登録</title>
+
+<!-- BootstrapのCSS読み込み -->
+    <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.min.css}" />
+<!-- jQuery読み込み -->
+    <script type="text/javascript" th:src="@{/webjars/jquery/1.11.3/jquery.min.js}"></script>
+<!-- BootstrapのJS読み込み -->
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
+</head>
+<body>
+
+<div class="container">
+	<div class="row">
+            <div class="col-md-3 col-lg-3"></div>
+            <div class="col-md-6 col-lg-6">
+				<form method="post" action="/userCreate" th:object="${userCreate}">
+						<fieldset id="login_field">
+                            <div class="form-group">
+                                <label>ログインID</label>
+                                <input type="text" class="form-control" id="loginId" name="loginId" th:value="*{loginId}" placeholder="ログインIDを入力してください" autofocus="" required="" />
+                                <div th:if="${#fields.hasErrors('loginId')}" th:errors="*{loginId}" class="alert alert-danger" role="alert" ></div>
+                                <div th:if="${ErrorMessage=='existsLoginId'}"  class="alert alert-danger" role="alert" >このユーザーIDはすでに使用されています</div>
+                            </div>
+                            <div class="form-group">
+                                <label>パスワード</label>
+                                <input type="password" class="form-control" id="loginPassword" name="loginPassword" th:value="*{loginPassword}" placeholder="パスワードを入力してください" required="" />
+                                <div th:if="${#fields.hasErrors('loginPassword')}" th:errors="*{loginPassword}" class="alert alert-danger" role="alert" ></div>
+                            </div>
+                            <div class="form-group">
+                                <input id="login_button" type="submit" value="ユーザー登録" class="btn btn-info" />
+                            </div>
+                        </fieldset>
+				</form>
+			</div>
+        <div class="col-md-3 col-lg-3"></div>
+	</div>
+</div>
+</body>
+</html>
