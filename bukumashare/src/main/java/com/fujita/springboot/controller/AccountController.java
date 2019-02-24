@@ -21,13 +21,8 @@ import ch.qos.logback.core.net.LoginAuthenticator;
 
 
 @Controller
-/* @SessionAttributes(names="loginInfo") */
-public class TestController {
+public class AccountController {
 
-	/*
-	 * @ModelAttribute("loginInfo") public Account setLoginInfo (Account account) {
-	 * return account; }
-	 */
 
 	@Autowired
 	HttpSession session;
@@ -45,7 +40,7 @@ public class TestController {
 	}
 
 	@RequestMapping(value="/goLogin")
-		public ModelAndView gologin(@ModelAttribute("loginForm") Account account,ModelAndView modelAndView) {
+		public ModelAndView gologin(@ModelAttribute("loginForm") Account account ,ModelAndView modelAndView) {
 			modelAndView.setViewName("/login");
 			return modelAndView;
 		}
