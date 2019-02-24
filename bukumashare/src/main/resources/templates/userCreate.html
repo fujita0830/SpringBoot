@@ -18,7 +18,7 @@
             <div class="col-md-3 col-lg-3"></div>
             <div class="col-md-6 col-lg-6">
 				<form method="post" action="/userCreate" th:object="${userCreate}">
-						<fieldset id="login_field">
+						<fieldset id="user_create">
                             <div class="form-group">
                                 <label>ログインID</label>
                                 <input type="text" class="form-control" id="loginId" name="loginId" th:value="*{loginId}" placeholder="ログインIDを入力してください" autofocus="" required="" />
@@ -28,10 +28,9 @@
                             <div class="form-group">
                                 <label>パスワード</label>
                                 <input type="password" class="form-control" id="loginPassword" name="loginPassword" th:value="*{loginPassword}" placeholder="パスワードを入力してください" required="" />
-                                <div th:if="${#fields.hasErrors('loginPassword')}" th:errors="*{loginPassword}" class="alert alert-danger" role="alert" ></div>
                             </div>
                             <div class="form-group">
-                                <input id="login_button" type="submit" value="ユーザー登録" class="btn btn-info" />
+                                <input id="createUser_button" type="submit" value="ユーザー登録" class="btn btn-info " />
                             </div>
                         </fieldset>
 				</form>

@@ -17,11 +17,11 @@ public class Account {
 	@Column
 	private long id;
 
-	@Column(name="login_id",nullable=false,unique=true)
+	@Column(name="login_id",nullable=false,unique=true,length = 20)
 	@Pattern(regexp="[0-9a-zA-Z]+",message="半角英数字のみで入力してください")
 	private String loginId;
 
-	@Column(name="login_password",nullable=false)
+	@Column(name="login_password",nullable=false ,length = 20)
 	@Pattern(regexp="[0-9a-zA-Z]+",message="半角英数字のみで入力してください")
 	private String loginPassword;
 

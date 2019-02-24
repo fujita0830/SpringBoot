@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.thymeleaf.org">
+<head>
+ <meta charset="utf-8">
+<title>ブックマーク登録</title>
+<!-- BootstrapのCSS読み込み -->
+    <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.min.css}" />
+<!-- jQuery読み込み -->
+    <script type="text/javascript" th:src="@{/webjars/jquery/1.11.3/jquery.min.js}"></script>
+<!-- BootstrapのJS読み込み -->
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
+</head>
+<body>
+
+<div class="container">
+	<div class="row">
+            <div class="col-md-3 col-lg-3"></div>
+            <div class="col-md-6 col-lg-6">
+				<form method="post" action="/userCreate" th:object="${contentsCreate}">
+						<fieldset id="contents_create">
+
+							<div class="form-group">
+								<input type="radio" name="readStatus" value="0">後で読む
+								<input type="radio" name="readStatus" value="1">読み終わった
+							</div>
+                            <div class="form-group">
+                                <label>URL</label>
+                                <input type="text" class="form-control" id="url" name="url" th:value="*{url}" placeholder="urlを入力してください" autofocus="" required="" />
+                                <div th:if="${#fields.hasErrors('url')}" th:errors="*{url}" class="alert alert-danger" role="alert" ></div>
+                            </div>
+                            <div class="form-group">
+                                <label>コメント</label>
+                                <input type="text" class="form-control" id="comment" name="comment" th:value="*{comment}" placeholder="コメントを入力してください"  />
+                            </div>
+                            <div class="form-group">
+                                <input id="create_button" type="submit" value="ブクマ登録" class="btn btn-info" />
+                            </div>
+                        </fieldset>
+				</form>
+			</div>
+        <div class="col-md-3 col-lg-3"></div>
+	</div>
+</div>
+
+</body>
+</html>
