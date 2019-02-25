@@ -15,11 +15,14 @@ public class Contents {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="contents_id")
+	@Column(name="contents_id",nullable=false)
 	private long contentsId;
 
-	@Column(name="account_id")
+	@Column(name="account_id",nullable=false)
 	private long accountId;
+
+	@Column(name="login_id" ,nullable=false)
+	private String loginId;
 
 	@Column
 	private String title;
@@ -56,6 +59,14 @@ public class Contents {
 
 	public void setAccountId(long accountId) {
 		this.accountId = accountId;
+	}
+
+	public String getLoginId() {
+		return loginId;
+	}
+
+	public void setLoginId(String loginId) {
+		this.loginId = loginId;
 	}
 
 	public String getTitle() {

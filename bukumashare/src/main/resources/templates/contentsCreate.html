@@ -21,7 +21,7 @@
 
 							<div class="form-group">
 								<div class="custom-control custom-radio custom-control-inline">
-									<input type="radio" id="customRadioInline1" name="readStatus" class="custom-control-input" value="0">
+									<input type="radio" id="customRadioInline1" name="readStatus" class="custom-control-input" checked="checked" value="0">
 									<label class="custom-control-label" for="customRadioInline1">後で読む</label>
 								</div>
 								<div class="custom-control custom-radio custom-control-inline">
@@ -29,6 +29,10 @@
 										<label class="custom-control-label" for="customRadioInline2">読み終わった</label>
 								</div>
 							</div>
+							<div class="form-group">
+                                <label>タイトル</label>
+                                <input type="text" class="form-control" id="title" name="title" th:value="*{title}" placeholder="タイトルを入力してください"  />
+                            </div>
 
                             <div class="form-group">
                                 <label>URL</label>
