@@ -13,6 +13,16 @@
 <body>
 
 
+<table class="table table-striped">
+<tr><th>タイトル</th><th>状態</th><th>コメント</th></tr>
+<tr th:each="obj:${contentsList}" >
+	<td th:text="${obj.title}"></td>
+	<td th:if="${obj.readStatus=='0'}" th:text="後で読む" ></td>
+	<td th:if="${obj.readStatus=='1'}" th:text="読み終わった" ></td>
+	<td th:text="${obj.comment}"></td>
+</tr>
+</table>
+
 
 <form action="/goContentsCreate">
 <input type="submit" value="ブックマーク登録" class="btn btn-primary">

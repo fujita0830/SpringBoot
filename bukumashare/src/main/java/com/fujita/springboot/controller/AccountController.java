@@ -37,9 +37,8 @@ public class AccountController {
 	@RequestMapping(value="/",method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView modelAndView) {
 		modelAndView.setViewName("/index");
-		Iterable<Account> list = accountrepository.findAll();
-		modelAndView.addObject("datalist",list);
-
+		Iterable<Contents> contentsList = contentsRepository.findByReadStatus("1");
+		modelAndView.addObject("contentsList",contentsList);
 		return modelAndView;
 	}
 
@@ -51,6 +50,7 @@ public class AccountController {
 
 	@RequestMapping(value="login")
 	public ModelAndView LoginAuthenticator(@ModelAttribute("loginForm")@Validated Account account,
+			@ModelAttribute("contents") Contents contents,
 			BindingResult result,ModelAndView modelAndView) {
 
 		if(!result.hasErrors()) {
@@ -62,6 +62,9 @@ public class AccountController {
 				accountrepository.saveAndFlush(account);
 				session.setAttribute("account", account);
 				session.setAttribute("loginFlg", account.getLoginFlg());
+
+				Iterable<Contents> contentsList =contentsRepository.findAll();
+				modelAndView.addObject("contentsList", contentsList);
 
 				modelAndView.setViewName("/myPage");
 			}else {
@@ -108,12 +111,9 @@ public class AccountController {
 			@ModelAttribute("contents") Contents contents, ModelAndView modelAndView) {
 
 		if((String) session.getAttribute("loginFlg")=="1") {
-
-
 			account=(Account) (session.getAttribute("account"));
-			Iterable<Contents> contentslist =
-					contentsRepository.findByAccountId(account.getId());
-			modelAndView.addObject("contentsList", contentslist);
+			Iterable<Contents> contentsList =contentsRepository.findByAccountId(account.getId());
+			modelAndView.addObject("contentsList", contentsList);
 			modelAndView.setViewName("/myPage");
 
 		}else {

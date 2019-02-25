@@ -12,15 +12,8 @@
     <script type="text/javascript" th:src="@{/webjars/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
 </head>
 <body>
+<div class="container">
 
-<table class="table table-striped">
-<tr><th>ID</th><th>ログインID</th><th>ログインパスワード</th></tr>
-<tr th:each="obj:${datalist}" >
-	<td th:text="${obj.id}">テスト</td>
-	<td th:text="${obj.loginId}">ログイン</td>
-	<td th:text="${obj.loginPassword}">パスワード</td>
-</tr>
-</table>
 
 <form action="/goLogin">
 <input type="submit" value="ログイン"  class="btn btn-primary">
@@ -37,6 +30,28 @@
 <form action="/contents">
 <input type="submit" value="" class="btn btn-primary">
 </form>
+
+
+<div  th:each="obj:${contentsList}" style="margin-top: 30px;">
+
+<div class="col-md-10">
+       <div class="card mb-10 box-shadow">
+            <div class="card-header" th:text="${obj.title}">
+                <h4 class="my-0 font-weight-normal"></h4>
+            </div>
+            <div class="card-body">
+                <h1 class="card-title pricing-card-title"> <small class="text-muted"></small></h1>
+                <ul class="list-group-flush mt-10 mb-10">
+                    <li class="list-group-item" th:if="${obj.readStatus=='0'}" th:text="後で読む"></li>
+                    <li class="list-group-item" th:if="${obj.readStatus=='1'}" th:text="読み終わった" ></li>
+                    <li class="list-group-item" th:text="${obj.comment}"></li>
+                </ul>
+            </div>
+        </div>
+</div>
+
+</div>
+
 
 </body>
 </html>
