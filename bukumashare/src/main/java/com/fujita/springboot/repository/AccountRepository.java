@@ -15,7 +15,7 @@ public interface AccountRepository extends JpaRepository<Account, Long>{
 
 	public boolean existsByLoginId(String loginId);
 
-	public Optional<Account>findByLoginIdAndLoginPassword(String loginId,String loginPassword);
+	public Account findByLoginIdAndLoginPassword(String loginId,String loginPassword);
 
 	public boolean existsByLoginIdAndLoginPassword(String loginID,String loginPassword);
 

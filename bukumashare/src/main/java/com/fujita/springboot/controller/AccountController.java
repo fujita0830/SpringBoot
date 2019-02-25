@@ -1,6 +1,6 @@
 package com.fujita.springboot.controller;
 
-import java.security.PublicKey;
+
 
 import javax.servlet.http.HttpSession;
 
@@ -11,13 +11,14 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
+
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fujita.springboot.entity.Account;
+import com.fujita.springboot.entity.Contents;
 import com.fujita.springboot.repository.AccountRepository;
+import com.fujita.springboot.repository.ContentsRepository;
 
-import ch.qos.logback.core.net.LoginAuthenticator;
 
 
 @Controller
@@ -29,6 +30,9 @@ public class AccountController {
 
 	@Autowired
 	AccountRepository accountrepository;
+
+	@Autowired
+	ContentsRepository contentsRepository ;
 
 	@RequestMapping(value="/",method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView modelAndView) {
@@ -53,8 +57,9 @@ public class AccountController {
 
 			if(accountrepository.existsByLoginIdAndLoginPassword(account.getLoginId() ,account.getLoginPassword())){
 
-				accountrepository.findByLoginIdAndLoginPassword(account.getLoginId(), account.getLoginPassword());
+				account=accountrepository.findByLoginIdAndLoginPassword(account.getLoginId(), account.getLoginPassword());
 				account.setLoginFlg("1");
+				accountrepository.saveAndFlush(account);
 				session.setAttribute("account", account);
 				session.setAttribute("loginFlg", account.getLoginFlg());
 
@@ -99,10 +104,18 @@ public class AccountController {
 
 
 	@RequestMapping(value ="/myPage")
-	public ModelAndView myPage(ModelAndView modelAndView) {
+	public ModelAndView myPage(@ModelAttribute("loginForm")Account account,
+			@ModelAttribute("contents") Contents contents, ModelAndView modelAndView) {
 
 		if((String) session.getAttribute("loginFlg")=="1") {
+
+
+			account=(Account) (session.getAttribute("account"));
+			Iterable<Contents> contentslist =
+					contentsRepository.findByAccountId(account.getId());
+			modelAndView.addObject("contentsList", contentslist);
 			modelAndView.setViewName("/myPage");
+
 		}else {
 			modelAndView.setViewName("redirect:/goLogin");
 		}

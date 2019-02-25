@@ -5,7 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table
@@ -16,10 +18,14 @@ public class Contents {
 	@Column(name="contents_id")
 	private long contentsId;
 
+	@Column(name="account_id")
+	private long accountId;
+
 	@Column
 	private String title;
 
 	@Column
+	@Pattern(regexp="(https?|ftp)(:\\/\\/[-_.!~*\\'()a-zA-Z0-9;\\/?:\\@&=+\\$,%#]+)",message="urlを入力してください")
 	private String url;
 
 	@Column(name = "read_status")
@@ -34,12 +40,22 @@ public class Contents {
 	@Column
 	private String comment;
 
+	@ManyToOne
+
 	public long getContentsId() {
 		return contentsId;
 	}
 
 	public void setContentsId(long contentsId) {
 		this.contentsId = contentsId;
+	}
+
+	public long getAccountId() {
+		return accountId;
+	}
+
+	public void setAccountId(long accountId) {
+		this.accountId = accountId;
 	}
 
 	public String getTitle() {
