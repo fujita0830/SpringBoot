@@ -13,16 +13,26 @@
 <body>
 
 
-<table class="table table-striped">
-<tr><th>タイトル</th><th>状態</th><th>コメント</th></tr>
-<tr th:each="obj:${contentsList}" >
-	<td th:text="${obj.title}"></td>
-	<td th:if="${obj.readStatus=='0'}" th:text="後で読む" ></td>
-	<td th:if="${obj.readStatus=='1'}" th:text="読み終わった" ></td>
-	<td th:text="${obj.comment}"></td>
-</tr>
-</table>
+<div  th:each="obj:${contentsList}" style="margin-top: 30px;">
 
+<div class="col-md-10">
+       <div class="card mb-10 box-shadow">
+            <a href="" th:href="@{${obj.url}}" class="card-header" 　th:text="${obj.title}"></a>
+                <h4 class="my-0 font-weight-normal"></h4>
+            <div class="card-body">
+                <h1 class="card-title pricing-card-title"> <small class="text-muted"></small></h1>
+                <ul class="list-group-flush mt-10 mb-10">
+                	<!-- <li class="list-group-item" th:text="${obj.loginId}"></li> -->
+
+                    <li class="list-group-item" th:if="${obj.readStatus=='0'}" th:text="後で読む"></li>
+                    <li class="list-group-item" th:if="${obj.readStatus=='1'}" th:text="読み終わった" ></li>
+                    <li class="list-group-item" th:text="${obj.comment}"></li>
+                </ul>
+            </div>
+        </div>
+</div>
+
+</div>
 
 <form action="/goContentsCreate">
 <input type="submit" value="ブックマーク登録" class="btn btn-primary">

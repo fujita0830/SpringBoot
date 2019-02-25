@@ -41,18 +41,25 @@ public class ContentsController {
 	public ModelAndView contentsCreate(@ModelAttribute  Account account ,@ModelAttribute("contentsCreate")@Validated Contents contents,
 			BindingResult result,
 			ModelAndView modelAndView) {
+		if((String) session.getAttribute("loginFlg")=="1") {
 
-		if(!result.hasErrors()) {
-			account=(Account) (session.getAttribute("account"));
-			contents.setAccountId(account.getId());
-			contentsrepository.saveAndFlush(contents);
-			modelAndView.setViewName("/myPage");
+			if(!result.hasErrors()) {
+				account=(Account) (session.getAttribute("account"));
+				contents.setAccountId(account.getId());
+				contents.setLoginId(account.getLoginId());
+				contentsrepository.saveAndFlush(contents);
+				Iterable<Contents> contentsList =contentsrepository.findByAccountId(account.getId());
+				modelAndView.addObject("contentsList",contentsList);
+				modelAndView.setViewName("/myPage");
+			}else {
+				modelAndView.setViewName("/contentsCreate");
+			}
+
 		}else {
-			modelAndView.setViewName("/contentsCreate");
+			modelAndView.setViewName("redirect:/goLogin");
 		}
+
 		return modelAndView;
 	}
-
-
 
 }

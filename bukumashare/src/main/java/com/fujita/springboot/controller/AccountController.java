@@ -32,12 +32,12 @@ public class AccountController {
 	AccountRepository accountrepository;
 
 	@Autowired
-	ContentsRepository contentsRepository ;
+	ContentsRepository contentsrepository ;
 
 	@RequestMapping(value="/",method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView modelAndView) {
 		modelAndView.setViewName("/index");
-		Iterable<Contents> contentsList = contentsRepository.findByReadStatus("1");
+		Iterable<Contents> contentsList = contentsrepository.findByReadStatus("1");
 		modelAndView.addObject("contentsList",contentsList);
 		return modelAndView;
 	}
@@ -63,7 +63,7 @@ public class AccountController {
 				session.setAttribute("account", account);
 				session.setAttribute("loginFlg", account.getLoginFlg());
 
-				Iterable<Contents> contentsList =contentsRepository.findAll();
+				Iterable<Contents> contentsList =contentsrepository.findAll();
 				modelAndView.addObject("contentsList", contentsList);
 
 				modelAndView.setViewName("/myPage");
@@ -112,7 +112,7 @@ public class AccountController {
 
 		if((String) session.getAttribute("loginFlg")=="1") {
 			account=(Account) (session.getAttribute("account"));
-			Iterable<Contents> contentsList =contentsRepository.findByAccountId(account.getId());
+			Iterable<Contents> contentsList =contentsrepository.findByAccountId(account.getId());
 			modelAndView.addObject("contentsList", contentsList);
 			modelAndView.setViewName("/myPage");
 

@@ -36,12 +36,13 @@
 
 <div class="col-md-10">
        <div class="card mb-10 box-shadow">
-            <div class="card-header" th:text="${obj.title}">
+            <a href="" th:href="@{${obj.url}}" class="card-header" 　th:text="${obj.title}"></a>
                 <h4 class="my-0 font-weight-normal"></h4>
-            </div>
             <div class="card-body">
                 <h1 class="card-title pricing-card-title"> <small class="text-muted"></small></h1>
                 <ul class="list-group-flush mt-10 mb-10">
+                	<!-- <li class="list-group-item" th:text="${obj.loginId}"></li> -->
+
                     <li class="list-group-item" th:if="${obj.readStatus=='0'}" th:text="後で読む"></li>
                     <li class="list-group-item" th:if="${obj.readStatus=='1'}" th:text="読み終わった" ></li>
                     <li class="list-group-item" th:text="${obj.comment}"></li>
