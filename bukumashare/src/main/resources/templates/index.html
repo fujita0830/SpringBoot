@@ -12,25 +12,9 @@
     <script type="text/javascript" th:src="@{/webjars/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
 </head>
 <body>
-<div class="container">
 
-
-<form action="/goLogin">
-<input type="submit" value="ログイン"  class="btn btn-primary">
-</form>
-
-<form action="/goUserCreate">
-<input type="submit" value="ユーザー登録"  class="btn btn-primary">
-</form>
-
-<form action="/myPage">
-<input type="submit" value="マイページ"  class="btn btn-primary">
-</form>
-
-<form action="/contents">
-<input type="submit" value="" class="btn btn-primary">
-</form>
-
+<div th:replace="header"></div>
+<div class="container" >
 
 <div  th:each="obj:${contentsList}" style="margin-top: 30px;">
 
@@ -52,6 +36,23 @@
 </div>
 
 </div>
+
+
+<form action="/goLogin">
+<input type="submit" value="ログイン"  class="btn btn-primary">
+</form>
+
+<form action="/goUserCreate">
+<input type="submit" value="ユーザー登録"  class="btn btn-primary">
+</form>
+
+<form action="/myPage">
+<input type="submit" value="マイページ"  class="btn btn-primary">
+</form>
+
+<form action="/contents">
+<input type="submit" value="" class="btn btn-primary">
+</form>
 
 
 </body>
