@@ -2,6 +2,7 @@ package com.fujita.springboot.controller;
 
 
 
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,14 @@ public class AccountController {
 	@Autowired
 	ContentsRepository contentsrepository ;
 
-	@RequestMapping(value="/",method = RequestMethod.GET)
+
+	@RequestMapping(value="/")
+	public ModelAndView top(ModelAndView modelAndView) {
+		modelAndView.setViewName("/top");
+		return modelAndView;
+	}
+
+	@RequestMapping(value="/index",method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView modelAndView) {
 		modelAndView.setViewName("/index");
 		Iterable<Contents> contentsList = contentsrepository.findByReadStatus("1");
@@ -48,7 +56,7 @@ public class AccountController {
 			return modelAndView;
 		}
 
-	@RequestMapping(value="login")
+	@RequestMapping(value="/login")
 	public ModelAndView LoginAuthenticator(@ModelAttribute("loginForm")@Validated Account account,
 			@ModelAttribute("contents") Contents contents,
 			BindingResult result,ModelAndView modelAndView) {
@@ -61,6 +69,7 @@ public class AccountController {
 				account.setLoginFlg("1");
 				accountrepository.saveAndFlush(account);
 				session.setAttribute("account", account);
+				session.setAttribute("id", account.getId());
 				session.setAttribute("loginFlg", account.getLoginFlg());
 
 				Iterable<Contents> contentsList =contentsrepository.findAll();
@@ -78,6 +87,22 @@ public class AccountController {
 		}
 		return modelAndView;
 	}
+
+	@RequestMapping(value="/logout")
+	public ModelAndView logout(@ModelAttribute Account account,ModelAndView modelAndView) {
+
+		if((String) session.getAttribute("loginFlg")=="1") {
+			account=accountrepository.findById((long) session.getAttribute("id"));
+			account.setLoginFlg("0");
+			accountrepository.saveAndFlush(account);
+			session.invalidate();
+			modelAndView.setViewName("/top");
+		}else {
+			modelAndView.setViewName("redirect:/goLogin");
+		}
+		return modelAndView;
+	}
+
 
 
 	@RequestMapping(value = "/goUserCreate")
@@ -122,7 +147,10 @@ public class AccountController {
 
 		return modelAndView;
 
+
 	}
+
+
 
 
 

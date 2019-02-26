@@ -11,7 +11,7 @@ import com.fujita.springboot.entity.Account;
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Long>{
 
-	public Optional<Account> findById(long name);
+	public Account findById(long name);
 
 	public boolean existsByLoginId(String loginId);
 
