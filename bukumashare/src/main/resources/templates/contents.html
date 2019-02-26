@@ -24,11 +24,31 @@
                 <h1 class="card-title pricing-card-title"> <small class="text-muted"></small></h1>
                 <ul class="list-group-flush mt-10 mb-10">
                 	<li class="list-group-item" th:text="'ユーザー名:'+*{loginId}"></li>
-                    <li class="list-group-item" th:if="*{readStatus=='0'}" th:text="未読"></li>
-                    <li class="list-group-item" th:if="*{readStatus=='1'}" th:text="既読" ></li>
+
+					<li　th:if="${session.loginFlg=='1'}" class="list-group-item">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" id="customRadioInline1" name="readStatus" class="custom-control-input" th:checked="*{readStatus=='0'}" value="0">
+								<label class="custom-control-label" for="customRadioInline1">後で読む</label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" id="customRadioInline2" name="readStatus" class="custom-control-input" th:checked="*{readStatus=='1'}" value="1">
+						<label class="custom-control-label" for="customRadioInline2">既読</label>
+						</div>
+					</li>
+
+					<li th:if="${session.loginFlg=='1'}" class="list-group-item">
+						<div  class="custom-control custom-radio custom-control-inline">
+							<input type="radio" id="shareRadioInline1" name="shareStatus" class="share custom-control-input" checked="checked" value="0">
+								<label class="custom-control-label" for="shareRadioInline1">非公開</label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" id="shareRadioInline2" name="shareStatus" class="share custom-control-input" value="1">
+								<label class="custom-control-label" for="shareRadioInline2">公開</label>
+						</div>
+					</li>
                     <li class="list-group-item" th:text="'コメント:'+*{comment}"></li>
                 </ul>
-                <button type="submit" name="contentsId" th:value="*{contentsId}" class="btn btn-primary">記事編集</button>
+                <button th:if="${session.loginFlg=='1'}" type="submit" name="contentsId" th:value="*{contentsId}" class="btn btn-primary">ステータス変更</button>
             </div>
         </div>
 </div>

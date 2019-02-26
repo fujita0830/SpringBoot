@@ -31,8 +31,11 @@ public class Contents {
 	@Pattern(regexp="(https?|ftp)(:\\/\\/[-_.!~*\\'()a-zA-Z0-9;\\/?:\\@&=+\\$,%#]+)",message="urlを入力してください")
 	private String url;
 
-	@Column(name = "read_status")
+	@Column(name = "read_status",nullable=false)
 	private String readStatus;
+
+	@Column(name= "share_status",nullable=false)
+	private String shareStatus;
 
 	@Column(name="useful_category")
 	private String usefulCategory;
@@ -91,6 +94,14 @@ public class Contents {
 
 	public void setReadStatus(String readStatus) {
 		this.readStatus = readStatus;
+	}
+
+	public String getShareStatus() {
+		return shareStatus;
+	}
+
+	public void setShareStatus(String shareStatus) {
+		this.shareStatus = shareStatus;
 	}
 
 	public String getUsefulCategory() {

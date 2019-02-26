@@ -27,8 +27,6 @@
                 <h1 class="card-title pricing-card-title"> <small class="text-muted"></small></h1>
                 <ul class="list-group-flush mt-9 mb-9">
                 	<li class="list-group-item" th:text="'ユーザー名:'+${obj.loginId}"></li>
-                    <li class="list-group-item"　name="reatStatus" th:if="${obj.readStatus=='0'}" th:value="${obj.readStatus}" th:text="未読"></li>
-                    <li class="list-group-item" name="reatStatus" th:if="${obj.readStatus=='1'}" th:value="${obj.readStatus}" th:text="既読" ></li>
                     <li class="list-group-item" th:text="'コメント:'+${obj.comment}"></li>
                 </ul>
                 <button type="submit" name="contentsId" th:value="${obj.contentsId}" class="btn btn-primary">記事詳細</button>

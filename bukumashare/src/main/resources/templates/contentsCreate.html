@@ -33,6 +33,16 @@
 								</div>
 							</div>
 							<div class="form-group">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" id="shareRadioInline1" name="shareStatus" class="share custom-control-input" checked="checked" value="0">
+									<label class="custom-control-label" for="shareRadioInline1">非公開</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" id="shareRadioInline2" name="shareStatus" class="share custom-control-input" value="1">
+										<label class="custom-control-label" for="shareRadioInline2">公開</label>
+								</div>
+							</div>
+							<div class="form-group">
                                 <label>タイトル</label>
                                 <input type="text" class="form-control" id="title" name="title" th:value="*{title}" placeholder="タイトルを入力してください"  />
                             </div>

@@ -45,7 +45,7 @@ public class AccountController {
 	@RequestMapping(value="/index",method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView modelAndView) {
 		modelAndView.setViewName("/index");
-		Iterable<Contents> contentsList = contentsrepository.findByReadStatus("1");
+		Iterable<Contents> contentsList = contentsrepository.findByshareStatus("1");
 		modelAndView.addObject("contentsList",contentsList);
 		return modelAndView;
 	}
@@ -107,8 +107,6 @@ public class AccountController {
 		return modelAndView;
 	}
 
-
-
 	@RequestMapping(value = "/goUserCreate")
 	public ModelAndView gouserCreate(@ModelAttribute("userCreate") Account account,ModelAndView modelAndView) {
 		modelAndView.setViewName("/userCreate");
@@ -140,10 +138,28 @@ public class AccountController {
 			@ModelAttribute("contents") Contents contents, ModelAndView modelAndView) {
 
 		if((String) session.getAttribute("loginFlg")=="1") {
+
+			if(!(contents.getReadStatus()==null)&&
+					Integer.parseInt(contents.getReadStatus())==0) {
+
+				account=(Account) (session.getAttribute("account"));
+				Iterable<Contents> contentsList =contentsrepository.findByAccountIdAndReadStatus(account.getId(), contents.getReadStatus());
+				modelAndView.addObject("contentsList", contentsList);
+				modelAndView.setViewName("/myPage");
+
+			}else if(!(contents.getReadStatus()==null)&&
+					Integer.parseInt(contents.getReadStatus())==1) {
+				account=(Account) (session.getAttribute("account"));
+				Iterable<Contents> contentsList =contentsrepository.findByAccountIdAndReadStatus(account.getId(), contents.getReadStatus());
+				modelAndView.addObject("contentsList", contentsList);
+				modelAndView.setViewName("/myPage");
+			}else {
+
 			account=(Account) (session.getAttribute("account"));
 			Iterable<Contents> contentsList =contentsrepository.findByAccountId(account.getId());
 			modelAndView.addObject("contentsList", contentsList);
 			modelAndView.setViewName("/myPage");
+			}
 
 		}else {
 			modelAndView.setViewName("redirect:/goLogin");

@@ -74,6 +74,12 @@ public class ContentsController {
 
 		}else {
 			modelAndView.setViewName("redirect:/goLogin");
+
+			if(contents.getAccountId()== (long) (session.getAttribute("id"))) {
+				modelAndView.addObject("contents",contents);
+				modelAndView.setViewName("/contents");
+			}
+
 		}
 		return modelAndView;
 	}
