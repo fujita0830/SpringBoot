@@ -8,5 +8,6 @@ public interface ContentsRepository extends JpaRepository<Contents, Long>{
 
 	public  Iterable<Contents> findByAccountId(long accountid);
 	public Iterable<Contents> findByReadStatus(String readStatus);
+	public Contents findByContentsId(long contentsID);
 
 }

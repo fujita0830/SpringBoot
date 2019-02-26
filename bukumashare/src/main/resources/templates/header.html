@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<header  th:fragment="header"style="margin-bottom: 200px;">
+<header  th:fragment="header"style="margin-bottom: 120px;">
 
 	<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" >
       <a class="navbar-brand" th:href="@{/}">Home</a>
@@ -21,6 +21,9 @@
           </li>
           <li class="nav-item">
             <a  th:if="${session.loginFlg=='1'}" class="nav-link " th:href="@{/myPage}">マイページ</a>
+          </li>
+          <li class="nav-item">
+            <a  th:if="${session.loginFlg=='1'}" class="nav-link " th:href="@{/goContentsCreate}">ブックマーク登録</a>
           </li>
           <li class="nav-item">
             <a  th:if="${session.loginFlg=='1'}" class="nav-link " th:href="@{/logout}">ログアウト</a>

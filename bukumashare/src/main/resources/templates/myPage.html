@@ -14,8 +14,12 @@
 
 <div th:replace="header"></div>
 
+<div class="container" >
+
 <div  th:each="obj:${contentsList}" style="margin-top: 30px;">
 
+
+<form action="/contents" method="post">
 <div class="col-md-10">
        <div class="card mb-10 box-shadow">
             <a href="" th:href="@{${obj.url}}" class="card-header" 　th:text="${obj.title}"></a>
@@ -23,21 +27,20 @@
             <div class="card-body">
                 <h1 class="card-title pricing-card-title"> <small class="text-muted"></small></h1>
                 <ul class="list-group-flush mt-10 mb-10">
-                	<!-- <li class="list-group-item" th:text="${obj.loginId}"></li> -->
-
-                    <li class="list-group-item" th:if="${obj.readStatus=='0'}" th:text="後で読む"></li>
-                    <li class="list-group-item" th:if="${obj.readStatus=='1'}" th:text="読み終わった" ></li>
-                    <li class="list-group-item" th:text="${obj.comment}"></li>
+                	<li class="list-group-item" th:text="'ユーザー名:'+${obj.loginId}"></li>
+                    <li class="list-group-item" th:if="${obj.readStatus=='0'}" th:text="未読"></li>
+                    <li class="list-group-item" th:if="${obj.readStatus=='1'}" th:text="既読" ></li>
+                    <li class="list-group-item" th:text="'コメント:'+${obj.comment}"></li>
                 </ul>
+                <button type="submit" name="contentsId" th:value="${obj.contentsId}" class="btn btn-primary">記事詳細</button>
             </div>
         </div>
 </div>
+</form>
 
 </div>
 
-<form action="/goContentsCreate">
-<input type="submit" value="ブックマーク登録" class="btn btn-primary">
-</form>
+</div>
 
 </body>
 </html>

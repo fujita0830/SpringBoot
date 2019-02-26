@@ -52,6 +52,10 @@ public class AccountController {
 
 	@RequestMapping(value="/goLogin")
 		public ModelAndView gologin(@ModelAttribute("loginForm") Account account ,ModelAndView modelAndView) {
+
+		if((String) session.getAttribute("loginFlg")=="1") {
+			modelAndView.setViewName("/myPage");
+		}
 			modelAndView.setViewName("/login");
 			return modelAndView;
 		}
