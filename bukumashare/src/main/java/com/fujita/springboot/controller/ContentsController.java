@@ -58,8 +58,26 @@ public class ContentsController {
 		}else {
 			modelAndView.setViewName("redirect:/goLogin");
 		}
-
 		return modelAndView;
 	}
+
+
+	@RequestMapping(value="/contents")
+	public ModelAndView contents(@ModelAttribute Contents contents,
+			ModelAndView modelAndView) {
+
+		contents=contentsrepository.findByContentsId(contents.getContentsId());
+
+		if(Integer.parseInt(contents.getReadStatus())==1) {
+			modelAndView.addObject("contents",contents);
+			modelAndView.setViewName("/contents");
+
+		}else {
+			modelAndView.setViewName("redirect:/goLogin");
+		}
+		return modelAndView;
+	}
+
+
 
 }

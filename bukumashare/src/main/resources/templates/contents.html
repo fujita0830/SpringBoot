@@ -1,10 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja" xmlns="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>記事詳細</title>
+<!-- BootstrapのCSS読み込み -->
+    <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.min.css}" />
+<!-- jQuery読み込み -->
+    <script type="text/javascript" th:src="@{/webjars/jquery/1.11.3/jquery.min.js}"></script>
+<!-- BootstrapのJS読み込み -->
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
+
 </head>
 <body>
+<div th:replace="header"></div>
+
+<div class="container" >
+<form action="/contentsEdit" method="post"　th:object="${contents}" >
+<div class="col-md-10">
+       <div class="card mb-10 box-shadow">
+            <a href="" th:href="@{*{url}}" class="card-header" 　th:text="*{title}"></a>
+                <h4 class="my-0 font-weight-normal"></h4>
+            <div class="card-body">
+                <h1 class="card-title pricing-card-title"> <small class="text-muted"></small></h1>
+                <ul class="list-group-flush mt-10 mb-10">
+                	<li class="list-group-item" th:text="'ユーザー名:'+*{loginId}"></li>
+                    <li class="list-group-item" th:if="*{readStatus=='0'}" th:text="未読"></li>
+                    <li class="list-group-item" th:if="*{readStatus=='1'}" th:text="既読" ></li>
+                    <li class="list-group-item" th:text="'コメント:'+*{comment}"></li>
+                </ul>
+                <button type="submit" name="contentsId" th:value="*{contentsId}" class="btn btn-primary">記事編集</button>
+            </div>
+        </div>
+</div>
+</form>
+</div>
+
+
 
 </body>
 </html>

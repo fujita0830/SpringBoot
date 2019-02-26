@@ -6,27 +6,33 @@
 </head>
 <body>
 
-<header  th:fragment="header"style="margin-bottom: 250px;">
+<header  th:fragment="header"style="margin-bottom: 120px;">
 
 	<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" >
-      <a class="navbar-brand" th:href="@{/goLogin}">Login</a>
+      <a class="navbar-brand" th:href="@{/}">Home</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" th:href="@{/top}">Home <span class="sr-only">(current)</span></a>
+          <li class="nav-item">
+            <a th:if="${!(session.loginFlg=='1')}"　class="nav-link" th:href="@{/goLogin}">ログイン </a>
+          </li>
+          <li class="nav-item">
+            <a  th:if="${session.loginFlg=='1'}" class="nav-link " th:href="@{/myPage}">マイページ</a>
+          </li>
+          <li class="nav-item">
+            <a  th:if="${session.loginFlg=='1'}" class="nav-link " th:href="@{/goContentsCreate}">ブックマーク登録</a>
+          </li>
+          <li class="nav-item">
+            <a  th:if="${session.loginFlg=='1'}" class="nav-link " th:href="@{/logout}">ログアウト</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" th:href="@{/goUserCreate}">ユーザー登録</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled" th:href="@{/myPage}">マイページ</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" th:href="@{/}">コンテンツ一覧</a>
+            <a class="nav-link" th:href="@{/index}">コンテンツ一覧</a>
           </li>
 
           <li class="nav-item dropdown">
