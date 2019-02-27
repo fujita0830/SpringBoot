@@ -76,7 +76,7 @@ public class AccountController {
 				session.setAttribute("id", account.getId());
 				session.setAttribute("loginFlg", account.getLoginFlg());
 
-				Iterable<Contents> contentsList =contentsrepository.findAll();
+				Iterable<Contents> contentsList =contentsrepository.findByAccountId(account.getId());
 				modelAndView.addObject("contentsList", contentsList);
 
 				modelAndView.setViewName("/myPage");

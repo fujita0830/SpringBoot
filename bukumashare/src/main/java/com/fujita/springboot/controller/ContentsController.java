@@ -2,6 +2,7 @@ package com.fujita.springboot.controller;
 
 import javax.servlet.http.HttpSession;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.fujita.springboot.entity.Account;
 import com.fujita.springboot.entity.Contents;
@@ -85,5 +87,27 @@ public class ContentsController {
 	}
 
 
+	@RequestMapping(value="/contentsEdit")
+	@Transactional(readOnly = false)
+	public ModelAndView contentsEdit(@ModelAttribute Contents contents,
+			ModelAndView modelAndView) {
+
+		String readStatus = contents.getReadStatus();
+		String shareStatus = contents.getShareStatus();
+
+		contents=contentsrepository.findByContentsId(contents.getContentsId());
+
+		contents.setReadStatus(readStatus);
+		contents.setShareStatus(shareStatus);
+
+		contentsrepository.saveAndFlush(contents);
+
+		modelAndView.addObject("contents",contents);
+		modelAndView.addObject("message","success");
+		modelAndView.setViewName("/contents");
+
+		return modelAndView;
+
+	}
 
 }
