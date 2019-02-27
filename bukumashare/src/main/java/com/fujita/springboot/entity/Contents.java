@@ -1,12 +1,18 @@
 package com.fujita.springboot.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Pattern;
 
 @Entity
@@ -46,8 +52,28 @@ public class Contents {
 	@Column
 	private String comment;
 
-	@ManyToOne
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="insert_date")
+	private Date insertDate;
 
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="update_date")
+	private Date updateDate;
+
+	@PrePersist
+	public void prePersist() {
+		Date date = new Date();
+		insertDate = date;
+		updateDate = date;
+	}
+
+	@PreUpdate
+	public void preUpdate() {
+		updateDate = new Date();
+	}
+
+
+	@ManyToOne
 	public long getContentsId() {
 		return contentsId;
 	}
@@ -126,6 +152,22 @@ public class Contents {
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+	public Date getInsertDate() {
+		return insertDate;
+	}
+
+	public void setInsertDate(Date insertDate) {
+		this.insertDate = insertDate;
+	}
+
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
 	}
 
 }

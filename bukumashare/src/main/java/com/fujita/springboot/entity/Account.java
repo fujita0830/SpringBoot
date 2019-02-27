@@ -1,5 +1,6 @@
 package com.fujita.springboot.entity;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -9,7 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Pattern;
 
 @Entity
@@ -46,6 +50,14 @@ public class Account {
 	@Column(name = "login_flg")
 	private String loginFlg;
 
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="insert_date")
+	private Date insertDate;
+
+	@PrePersist
+	public void prePersist() {
+		insertDate = new Date();
+	}
 
 	public long getId() {
 		return id;
@@ -77,6 +89,14 @@ public class Account {
 
 	public void setLoginFlg(String loginFlg) {
 		this.loginFlg = loginFlg;
+	}
+
+	public Date getInsertDate() {
+		return insertDate;
+	}
+
+	public void setInsertDate(Date insertDate) {
+		this.insertDate = insertDate;
 	}
 
 }
