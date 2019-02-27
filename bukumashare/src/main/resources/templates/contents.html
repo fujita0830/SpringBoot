@@ -17,10 +17,12 @@
 <div class="container" >
 <form action="/contentsEdit" method="post"　th:object="${contents}" >
 <div class="col-md-10">
+<div th:if="${message=='success'}"  class="alert alert-success" role="alert" >変更が完了しました</div>
        <div class="card mb-10 box-shadow">
             <a href="" th:href="@{*{url}}" class="card-header" 　th:text="*{title}"></a>
                 <h4 class="my-0 font-weight-normal"></h4>
             <div class="card-body">
+
                 <h1 class="card-title pricing-card-title"> <small class="text-muted"></small></h1>
                 <ul class="list-group-flush mt-10 mb-10">
                 	<li class="list-group-item" th:text="'ユーザー名:'+*{loginId}"></li>

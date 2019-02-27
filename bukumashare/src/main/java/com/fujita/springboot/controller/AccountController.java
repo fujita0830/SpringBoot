@@ -45,7 +45,7 @@ public class AccountController {
 	@RequestMapping(value="/index",method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView modelAndView) {
 		modelAndView.setViewName("/index");
-		Iterable<Contents> contentsList = contentsrepository.findByshareStatus("1");
+		Iterable<Contents> contentsList = contentsrepository.findByshareStatusOrderByInsertDateDesc("1");
 		modelAndView.addObject("contentsList",contentsList);
 		return modelAndView;
 	}
@@ -76,7 +76,7 @@ public class AccountController {
 				session.setAttribute("id", account.getId());
 				session.setAttribute("loginFlg", account.getLoginFlg());
 
-				Iterable<Contents> contentsList =contentsrepository.findAll();
+				Iterable<Contents> contentsList =contentsrepository.findByAccountIdOrderByInsertDateDesc(account.getId());
 				modelAndView.addObject("contentsList", contentsList);
 
 				modelAndView.setViewName("/myPage");
@@ -143,20 +143,20 @@ public class AccountController {
 					Integer.parseInt(contents.getReadStatus())==0) {
 
 				account=(Account) (session.getAttribute("account"));
-				Iterable<Contents> contentsList =contentsrepository.findByAccountIdAndReadStatus(account.getId(), contents.getReadStatus());
+				Iterable<Contents> contentsList =contentsrepository.findByAccountIdAndReadStatusOrderByInsertDateDesc(account.getId(), contents.getReadStatus());
 				modelAndView.addObject("contentsList", contentsList);
 				modelAndView.setViewName("/myPage");
 
 			}else if(!(contents.getReadStatus()==null)&&
 					Integer.parseInt(contents.getReadStatus())==1) {
 				account=(Account) (session.getAttribute("account"));
-				Iterable<Contents> contentsList =contentsrepository.findByAccountIdAndReadStatus(account.getId(), contents.getReadStatus());
+				Iterable<Contents> contentsList =contentsrepository.findByAccountIdAndReadStatusOrderByInsertDateDesc(account.getId(), contents.getReadStatus());
 				modelAndView.addObject("contentsList", contentsList);
 				modelAndView.setViewName("/myPage");
 			}else {
 
 			account=(Account) (session.getAttribute("account"));
-			Iterable<Contents> contentsList =contentsrepository.findByAccountId(account.getId());
+			Iterable<Contents> contentsList =contentsrepository.findByAccountIdOrderByInsertDateDesc(account.getId());
 			modelAndView.addObject("contentsList", contentsList);
 			modelAndView.setViewName("/myPage");
 			}
