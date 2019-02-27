@@ -16,10 +16,23 @@
 
 <div class="container" >
 
+
+<form action="/myPage">
+
+<button type="submit" name="readStatus" value="0" class="btn btn-primary">未読</button>
+
+<button type="submit" name="readStatus" value="1" class="btn btn-primary">既読</button>
+
+<button type="submit"  class="btn btn-primary">一覧</button>
+</form>
+
+<form action="/contents" method="post">
+
+
 <div  th:each="obj:${contentsList}" style="margin-top: 30px;">
 
 
-<form action="/contents" method="post">
+
 <div class="col-md-10">
        <div class="card mb-10 box-shadow">
             <a href="" th:href="@{${obj.url}}" class="card-header" 　th:text="${obj.title}"></a>
@@ -28,17 +41,23 @@
                 <h1 class="card-title pricing-card-title"> <small class="text-muted"></small></h1>
                 <ul class="list-group-flush mt-10 mb-10">
                 	<li class="list-group-item" th:text="'ユーザー名:'+${obj.loginId}"></li>
-                    <li class="list-group-item" th:if="${obj.readStatus=='0'}" th:text="未読"></li>
+                    <li class="list-group-item" th:if="${obj.readStatus=='0'}" th:text="後で読む"></li>
                     <li class="list-group-item" th:if="${obj.readStatus=='1'}" th:text="既読" ></li>
+                    <li class="list-group-item" th:if="${obj.shareStatus=='0'}" th:text="非公開"></li>
+                    <li class="list-group-item" th:if="${obj.shareStatus=='1'}" th:text="公開"></li>
                     <li class="list-group-item" th:text="'コメント:'+${obj.comment}"></li>
                 </ul>
                 <button type="submit" name="contentsId" th:value="${obj.contentsId}" class="btn btn-primary">記事詳細</button>
             </div>
         </div>
 </div>
-</form>
+
+
+
 
 </div>
+</form>
+
 
 </div>
 
