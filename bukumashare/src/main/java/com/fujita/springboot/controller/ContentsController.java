@@ -50,7 +50,7 @@ public class ContentsController {
 				contents.setAccountId(account.getId());
 				contents.setLoginId(account.getLoginId());
 				contentsrepository.saveAndFlush(contents);
-				Iterable<Contents> contentsList =contentsrepository.findByAccountId(account.getId());
+				Iterable<Contents> contentsList =contentsrepository.findByAccountIdOrderByInsertDateDesc(account.getId());
 				modelAndView.addObject("contentsList",contentsList);
 				modelAndView.setViewName("/myPage");
 			}else {
