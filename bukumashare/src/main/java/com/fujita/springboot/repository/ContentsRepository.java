@@ -15,11 +15,14 @@ public interface ContentsRepository extends JpaRepository<Contents, Long> {
 
 	public Iterable<Contents> findByAccountIdAndReadStatusOrderByInsertDateDesc(long accountId, String readStatus);
 
-	public Contents findByContentsId(long contentsID);
+	public Contents findByContentsId(long contentsId);
 
-	public Page<Contents> findByshareStatusOrderByInsertDateDesc(String shareStatus,Pageable pageable);
+	public Page<Contents> findByshareStatusOrderByInsertDateDesc(String shareStatus, Pageable pageable);
 
-	public Page<Contents> findByAccountIdAndReadStatusOrderByInsertDateDesc(long accountId, String readStatus,Pageable pageable);
+	public Page<Contents> findByAccountIdAndReadStatusOrderByInsertDateDesc(long accountId, String readStatus,
+			Pageable pageable);
 
-	public Page<Contents> findByAccountIdOrderByInsertDateDesc(long accountid,Pageable pageable);
+	public Page<Contents> findByAccountIdOrderByInsertDateDesc(long accountid, Pageable pageable);
+
+	public void deleteByContentsId(long contentsId);
 }

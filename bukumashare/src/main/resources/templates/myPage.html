@@ -31,12 +31,14 @@
 			<button type="submit" class="btn btn-primary">一覧</button>
 		</form>
 
-		<form action="/contents" method="post">
 
+		<div th:if="${message=='delete'}" class="alert alert-success"
+			role="alert">記事の削除が完了しました</div>
+
+
+		<form action="/contentsDetail" method="post">
 
 			<div th:each="obj:${contentsList}" style="margin-top: 30px;">
-
-
 
 				<div class="col-md-10">
 					<div class="card mb-10 box-shadow">
@@ -67,7 +69,7 @@
 			</div>
 		</form>
 		<div th:replace="pagenation"></div>
-	</div>
 
+	</div>
 </body>
 </html>

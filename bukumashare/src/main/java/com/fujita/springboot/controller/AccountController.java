@@ -127,29 +127,30 @@ public class AccountController {
 
 	@RequestMapping(value = "/myPage")
 	public ModelAndView myPage(@ModelAttribute("loginForm") Account account,
-			@ModelAttribute("contents") Contents contents,@PageableDefault(size = 3) Pageable pageable, ModelAndView modelAndView) {
+			@ModelAttribute("contents") Contents contents, @PageableDefault(size = 3) Pageable pageable,
+			ModelAndView modelAndView) {
 
 		if ((String) session.getAttribute("loginFlg") == "1") {
 
 			if (!(contents.getReadStatus() == null) && Integer.parseInt(contents.getReadStatus()) == 0) {
 
 				account = (Account) (session.getAttribute("account"));
-				Page<Contents> contentsList = contentsrepository
-						.findByAccountIdAndReadStatusOrderByInsertDateDesc(account.getId(), contents.getReadStatus(),pageable);
+				Page<Contents> contentsList = contentsrepository.findByAccountIdAndReadStatusOrderByInsertDateDesc(
+						account.getId(), contents.getReadStatus(), pageable);
 				modelAndView.addObject("contentsList", contentsList);
 				modelAndView.setViewName("/myPage");
 
 			} else if (!(contents.getReadStatus() == null) && Integer.parseInt(contents.getReadStatus()) == 1) {
 				account = (Account) (session.getAttribute("account"));
-				Page<Contents> contentsList = contentsrepository
-						.findByAccountIdAndReadStatusOrderByInsertDateDesc(account.getId(), contents.getReadStatus(),pageable);
+				Page<Contents> contentsList = contentsrepository.findByAccountIdAndReadStatusOrderByInsertDateDesc(
+						account.getId(), contents.getReadStatus(), pageable);
 				modelAndView.addObject("contentsList", contentsList);
 				modelAndView.setViewName("/myPage");
 			} else {
 
 				account = (Account) (session.getAttribute("account"));
-				Page<Contents> contentsList = contentsrepository
-						.findByAccountIdOrderByInsertDateDesc(account.getId(),pageable);
+				Page<Contents> contentsList = contentsrepository.findByAccountIdOrderByInsertDateDesc(account.getId(),
+						pageable);
 				modelAndView.addObject("contentsList", contentsList);
 				modelAndView.setViewName("/myPage");
 			}
