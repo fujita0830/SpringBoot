@@ -20,30 +20,30 @@ import javax.validation.constraints.Pattern;
 public class Contents {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="contents_id",nullable=false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "contents_id", nullable = false)
 	private long contentsId;
 
-	@Column(name="account_id",nullable=false)
+	@Column(name = "account_id", nullable = false)
 	private long accountId;
 
-	@Column(name="login_id" ,nullable=false)
+	@Column(name = "login_id", nullable = false)
 	private String loginId;
 
 	@Column
 	private String title;
 
 	@Column
-	@Pattern(regexp="(https?|ftp)(:\\/\\/[-_.!~*\\'()a-zA-Z0-9;\\/?:\\@&=+\\$,%#]+)",message="urlを入力してください")
+	@Pattern(regexp = "(https?|ftp)(:\\/\\/[-_.!~*\\'()a-zA-Z0-9;\\/?:\\@&=+\\$,%#]+)", message = "urlを入力してください")
 	private String url;
 
-	@Column(name = "read_status",nullable=false)
+	@Column(name = "read_status", nullable = false)
 	private String readStatus;
 
-	@Column(name= "share_status",nullable=false)
+	@Column(name = "share_status", nullable = false)
 	private String shareStatus;
 
-	@Column(name="useful_category")
+	@Column(name = "useful_category")
 	private String usefulCategory;
 
 	@Column
@@ -53,11 +53,11 @@ public class Contents {
 	private String comment;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="insert_date")
+	@Column(name = "insert_date")
 	private Date insertDate;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="update_date")
+	@Column(name = "update_date")
 	private Date updateDate;
 
 	@PrePersist
@@ -71,7 +71,6 @@ public class Contents {
 	public void preUpdate() {
 		updateDate = new Date();
 	}
-
 
 	@ManyToOne
 	public long getContentsId() {

@@ -7,18 +7,15 @@ import org.springframework.stereotype.Repository;
 
 import com.fujita.springboot.entity.Account;
 
-
 @Repository
-public interface AccountRepository extends JpaRepository<Account, Long>{
+public interface AccountRepository extends JpaRepository<Account, Long> {
 
 	public Account findById(long name);
 
 	public boolean existsByLoginId(String loginId);
 
-	public Account findByLoginIdAndLoginPassword(String loginId,String loginPassword);
+	public Account findByLoginIdAndLoginPassword(String loginId, String loginPassword);
 
-	public boolean existsByLoginIdAndLoginPassword(String loginID,String loginPassword);
-
-
+	public boolean existsByLoginIdAndLoginPassword(String loginID, String loginPassword);
 
 }

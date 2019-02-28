@@ -20,11 +20,9 @@ import javax.validation.constraints.Pattern;
 @Table
 public class Account {
 
-
-	@OneToMany(cascade=CascadeType.ALL)
-	@Column(nullable =true)
+	@OneToMany(cascade = CascadeType.ALL)
+	@Column(nullable = true)
 	private List<Contents> contents;
-
 
 	public List<Contents> getContents() {
 		return contents;
@@ -35,23 +33,23 @@ public class Account {
 	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
 	private long id;
 
-	@Column(name="login_id",nullable=false,unique=true,length = 20)
-	@Pattern(regexp="[0-9a-zA-Z]+",message="半角英数字のみで入力してください")
+	@Column(name = "login_id", nullable = false, unique = true, length = 20)
+	@Pattern(regexp = "[0-9a-zA-Z]+", message = "半角英数字のみで入力してください")
 	private String loginId;
 
-	@Column(name="login_password",nullable=false ,length = 20)
-	@Pattern(regexp="[0-9a-zA-Z]+",message="半角英数字のみで入力してください")
+	@Column(name = "login_password", nullable = false, length = 20)
+	@Pattern(regexp = "[0-9a-zA-Z]+", message = "半角英数字のみで入力してください")
 	private String loginPassword;
 
 	@Column(name = "login_flg")
 	private String loginFlg;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="insert_date")
+	@Column(name = "insert_date")
 	private Date insertDate;
 
 	@PrePersist

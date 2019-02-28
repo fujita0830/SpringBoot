@@ -1,44 +1,51 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns="http://www.thymeleaf.org">
 <head>
- <meta charset="utf-8">
+<meta charset="utf-8">
 <title>ホーム画面</title>
 
 <!-- BootstrapのCSS読み込み -->
-    <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.min.css}" />
+<link rel="stylesheet" media="all"
+	th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.min.css}" />
 <!-- jQuery読み込み -->
-    <script type="text/javascript" th:src="@{/webjars/jquery/1.11.3/jquery.min.js}"></script>
+<script type="text/javascript"
+	th:src="@{/webjars/jquery/1.11.3/jquery.min.js}"></script>
 <!-- BootstrapのJS読み込み -->
-    <script type="text/javascript" th:src="@{/webjars/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
+<script type="text/javascript"
+	th:src="@{/webjars/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
 </head>
 <body>
 
-<div th:replace="header"></div>
-<div class="container" >
+	<div th:replace="header"></div>
+	<div class="container">
 
-<div  th:each="obj:${contentsList}" style="margin-top: 30px;">
+		<div th:each="obj:${contentsList}" style="margin-top: 30px;">
 
-<form action="/contents" method="post">
-<div class="col-md-9 col-lg9">
-       <div class="card mb-9 box-shadow">
-            <a href="" th:href="@{${obj.url}}" class="card-header" 　th:text="${obj.title}"></a>
-                <h4 class="my-0 font-weight-normal"></h4>
-            <div class="card-body">
-                <h1 class="card-title pricing-card-title"> <small class="text-muted"></small></h1>
-                <ul class="list-group-flush mt-9 mb-9">
-                	<li class="list-group-item" th:text="'ユーザー名:'+${obj.loginId}"></li>
-                    <li class="list-group-item" th:text="'コメント:'+${obj.comment}"></li>
-                </ul>
-                <button type="submit" name="contentsId" th:value="${obj.contentsId}" class="btn btn-primary">記事詳細</button>
-            </div>
-        </div>
-</div>
-</form>
+			<form action="/contents" method="post">
+				<div class="col-md-9 col-lg9">
+					<div class="card mb-9 box-shadow">
+						<a href="" th:href="@{${obj.url}}" class="card-header"
+							　th:text="${obj.title}"></a>
+						<h4 class="my-0 font-weight-normal"></h4>
+						<div class="card-body">
+							<h1 class="card-title pricing-card-title">
+								<small class="text-muted"></small>
+							</h1>
+							<ul class="list-group-flush mt-9 mb-9">
+								<li class="list-group-item" th:text="'ユーザー名:'+${obj.loginId}"></li>
+								<li class="list-group-item" th:text="'コメント:'+${obj.comment}"></li>
+							</ul>
+							<button type="submit" name="contentsId"
+								th:value="${obj.contentsId}" class="btn btn-primary">記事詳細</button>
+						</div>
+					</div>
+				</div>
+			</form>
 
-</div>
+		</div>
 
 
-<!-- <form action="/goLogin">
+		<!-- <form action="/goLogin">
 <input type="submit" value="ログイン"  class="btn btn-primary">
 </form>
 
@@ -54,7 +61,7 @@
 <input type="submit" value="" class="btn btn-primary">
 </form>
  -->
-</div>
+	</div>
 
 </body>
 </html>
