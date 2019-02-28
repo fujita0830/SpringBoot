@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body th:fragment="pagenation">
+
+	<div class="col-md-9 col-lg9" style="margin-top: 100px;">
+		<div class="float-right"
+			th:with="s = ${(page.number + 3 > page.totalPages - 1)
+                    ? (page.totalPages - 1 - 6)
+                    : (page.number - 3)}">
+
+			<ul class="pagination pagination-sm">
+				<li th:class="|page-item ${page.first ? 'disabled' : ''}|"><a
+					class="page-link" aria-label="Previous"
+					th:href="@{''(page=${page.number - 1})}"> <span>&laquo;</span>
+				</a></li>
+
+				<li
+					th:each='i : ${#numbers.sequence((s < 0 ? 0 : s),
+                            ((s < 0 ? 0 : s) + 6) > (page.totalPages - 1)
+                           ? (page.totalPages - 1)
+                           : ((s < 0 ? 0 : s) + 6))}'
+					th:class="|page-item ${(page.number == i) ? 'active' : ''}|">
+					<a class="page-link" th:href="@{''(page=${i})}"> <span
+						th:text='${i + 1}'>1</span>
+				</a>
+				</li>
+
+				<li th:class="|page-item ${page.last ? 'disabled' : ''}|"><a
+					class="page-link" aria-label="Next"
+					th:href="@{''(page=${page.number + 1})}"> <span>&raquo;</span>
+				</a></li>
+			</ul>
+		</div>
+	</div>
+
+
+</body>
+</html>

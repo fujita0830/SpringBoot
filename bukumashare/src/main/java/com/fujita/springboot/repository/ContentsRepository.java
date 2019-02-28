@@ -17,4 +17,9 @@ public interface ContentsRepository extends JpaRepository<Contents, Long> {
 
 	public Contents findByContentsId(long contentsID);
 
+	public Page<Contents> findByshareStatusOrderByInsertDateDesc(String shareStatus,Pageable pageable);
+
+	public Page<Contents> findByAccountIdAndReadStatusOrderByInsertDateDesc(long accountId, String readStatus,Pageable pageable);
+
+	public Page<Contents> findByAccountIdOrderByInsertDateDesc(long accountid,Pageable pageable);
 }
