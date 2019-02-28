@@ -3,6 +3,9 @@ package com.fujita.springboot.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -36,9 +39,9 @@ public class AccountController {
 	}
 
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
-	public ModelAndView index(ModelAndView modelAndView) {
+	public ModelAndView index(ModelAndView modelAndView, @PageableDefault(size = 3) Pageable pageable) {
 		modelAndView.setViewName("/index");
-		Iterable<Contents> contentsList = contentsrepository.findByshareStatusOrderByInsertDateDesc("1");
+		Page<Contents> contentsList = contentsrepository.findByshareStatusOrderByInsertDateDesc("1", pageable);
 		modelAndView.addObject("contentsList", contentsList);
 		return modelAndView;
 	}
@@ -69,11 +72,7 @@ public class AccountController {
 				session.setAttribute("id", account.getId());
 				session.setAttribute("loginFlg", account.getLoginFlg());
 
-				Iterable<Contents> contentsList = contentsrepository
-						.findByAccountIdOrderByInsertDateDesc(account.getId());
-				modelAndView.addObject("contentsList", contentsList);
-
-				modelAndView.setViewName("/myPage");
+				modelAndView.setViewName("redirect:/myPage");
 			} else {
 
 				modelAndView.addObject("ErrorMessage", "existsLoginIdAndLoginPassword");
@@ -128,29 +127,30 @@ public class AccountController {
 
 	@RequestMapping(value = "/myPage")
 	public ModelAndView myPage(@ModelAttribute("loginForm") Account account,
-			@ModelAttribute("contents") Contents contents, ModelAndView modelAndView) {
+			@ModelAttribute("contents") Contents contents, @PageableDefault(size = 3) Pageable pageable,
+			ModelAndView modelAndView) {
 
 		if ((String) session.getAttribute("loginFlg") == "1") {
 
 			if (!(contents.getReadStatus() == null) && Integer.parseInt(contents.getReadStatus()) == 0) {
 
 				account = (Account) (session.getAttribute("account"));
-				Iterable<Contents> contentsList = contentsrepository
-						.findByAccountIdAndReadStatusOrderByInsertDateDesc(account.getId(), contents.getReadStatus());
+				Page<Contents> contentsList = contentsrepository.findByAccountIdAndReadStatusOrderByInsertDateDesc(
+						account.getId(), contents.getReadStatus(), pageable);
 				modelAndView.addObject("contentsList", contentsList);
 				modelAndView.setViewName("/myPage");
 
 			} else if (!(contents.getReadStatus() == null) && Integer.parseInt(contents.getReadStatus()) == 1) {
 				account = (Account) (session.getAttribute("account"));
-				Iterable<Contents> contentsList = contentsrepository
-						.findByAccountIdAndReadStatusOrderByInsertDateDesc(account.getId(), contents.getReadStatus());
+				Page<Contents> contentsList = contentsrepository.findByAccountIdAndReadStatusOrderByInsertDateDesc(
+						account.getId(), contents.getReadStatus(), pageable);
 				modelAndView.addObject("contentsList", contentsList);
 				modelAndView.setViewName("/myPage");
 			} else {
 
 				account = (Account) (session.getAttribute("account"));
-				Iterable<Contents> contentsList = contentsrepository
-						.findByAccountIdOrderByInsertDateDesc(account.getId());
+				Page<Contents> contentsList = contentsrepository.findByAccountIdOrderByInsertDateDesc(account.getId(),
+						pageable);
 				modelAndView.addObject("contentsList", contentsList);
 				modelAndView.setViewName("/myPage");
 			}

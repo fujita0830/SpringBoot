@@ -18,11 +18,12 @@
 	<div th:replace="header"></div>
 
 	<div class="container">
-		<form action="/contentsEdit" method="post" 　th:object="${contents}">
-			<div class="col-md-10">
-				<div th:if="${message=='success'}" class="alert alert-success"
-					role="alert">変更が完了しました</div>
-				<div class="card mb-10 box-shadow">
+
+		<div class="col-md-10">
+			<div th:if="${message=='success'}" class="alert alert-success"
+				role="alert">変更が完了しました</div>
+			<div class="card mb-10 box-shadow">
+				<form action="/contentsEdit" method="post" 　th:object="${contents}">
 					<a href="" th:href="@{*{url}}" class="card-header"
 						　th:text="*{title}"></a>
 					<h4 class="my-0 font-weight-normal"></h4>
@@ -68,12 +69,16 @@
 						<button th:if="${session.loginFlg=='1'}" type="submit"
 							name="contentsId" th:value="*{contentsId}"
 							class="btn btn-primary">ステータス変更</button>
-					</div>
-				</div>
-			</div>
-		</form>
-	</div>
+				</form>
 
+				<form action="/contentsDelete" method="post" th:object="${contents}">
+					<button th:if="${session.loginFlg=='1'}" type="submit"
+						name="contentsId" th:value="*{contentsId}"
+						class="float-right btn btn-primary">ブックマーク削除</button>
+				</form>
+			</div>
+		</div>
+	</div>
 
 
 </body>

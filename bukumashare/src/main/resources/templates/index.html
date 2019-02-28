@@ -17,11 +17,11 @@
 <body>
 
 	<div th:replace="header"></div>
-	<div class="container">
+	<div class="container" th:with="page = ${contentsList}">
 
 		<div th:each="obj:${contentsList}" style="margin-top: 30px;">
 
-			<form action="/contents" method="post">
+			<form action="/contentsDetail" method="post">
 				<div class="col-md-9 col-lg9">
 					<div class="card mb-9 box-shadow">
 						<a href="" th:href="@{${obj.url}}" class="card-header"
@@ -44,6 +44,7 @@
 
 		</div>
 
+		<div th:replace="pagenation"></div>
 
 		<!-- <form action="/goLogin">
 <input type="submit" value="ログイン"  class="btn btn-primary">

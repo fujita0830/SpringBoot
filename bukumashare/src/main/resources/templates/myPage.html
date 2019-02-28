@@ -17,10 +17,10 @@
 
 	<div th:replace="header"></div>
 
-	<div class="container">
+	<div class="container" th:with="page = ${contentsList}">
 
 
-		<form action="/myPage">
+		<form action="/myPage" th:with="page = ${contentsList}">
 
 			<button type="submit" name="readStatus" value="0"
 				class="btn btn-primary">未読</button>
@@ -31,12 +31,14 @@
 			<button type="submit" class="btn btn-primary">一覧</button>
 		</form>
 
-		<form action="/contents" method="post">
 
+		<div th:if="${message=='delete'}" class="alert alert-success"
+			role="alert">記事の削除が完了しました</div>
+
+
+		<form action="/contentsDetail" method="post">
 
 			<div th:each="obj:${contentsList}" style="margin-top: 30px;">
-
-
 
 				<div class="col-md-10">
 					<div class="card mb-10 box-shadow">
@@ -64,15 +66,10 @@
 						</div>
 					</div>
 				</div>
-
-
-
-
 			</div>
 		</form>
-
+		<div th:replace="pagenation"></div>
 
 	</div>
-
 </body>
 </html>

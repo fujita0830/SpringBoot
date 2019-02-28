@@ -48,10 +48,7 @@ public class ContentsController {
 				contents.setAccountId(account.getId());
 				contents.setLoginId(account.getLoginId());
 				contentsrepository.saveAndFlush(contents);
-				Iterable<Contents> contentsList = contentsrepository
-						.findByAccountIdOrderByInsertDateDesc(account.getId());
-				modelAndView.addObject("contentsList", contentsList);
-				modelAndView.setViewName("/myPage");
+				modelAndView.setViewName("redirect:/myPage");
 			} else {
 				modelAndView.setViewName("/contentsCreate");
 			}
@@ -62,24 +59,22 @@ public class ContentsController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/contents")
+	@RequestMapping(value = "/contentsDetail")
 	public ModelAndView contents(@ModelAttribute Contents contents, ModelAndView modelAndView) {
 
 		contents = contentsrepository.findByContentsId(contents.getContentsId());
 
-		if (Integer.parseInt(contents.getReadStatus()) == 1) {
+		if ((String) session.getAttribute("loginFlg") == "1") {
 			modelAndView.addObject("contents", contents);
-			modelAndView.setViewName("/contents");
+			modelAndView.setViewName("/contentsDetail");
+		} else if (Integer.parseInt(contents.getShareStatus()) == 1) {
+			modelAndView.addObject("contents", contents);
+			modelAndView.setViewName("/contentsDetail");
 
 		} else {
 			modelAndView.setViewName("redirect:/goLogin");
-
-			if (contents.getAccountId() == (long) (session.getAttribute("id"))) {
-				modelAndView.addObject("contents", contents);
-				modelAndView.setViewName("/contents");
-			}
-
 		}
+
 		return modelAndView;
 	}
 
@@ -99,7 +94,21 @@ public class ContentsController {
 
 		modelAndView.addObject("contents", contents);
 		modelAndView.addObject("message", "success");
-		modelAndView.setViewName("/contents");
+		modelAndView.setViewName("/contentsDetail");
+
+		return modelAndView;
+
+	}
+
+	@RequestMapping(value = "/contentsDelete")
+	@Transactional(readOnly = false)
+	public ModelAndView contentsDelete(@ModelAttribute Contents contents, ModelAndView modelAndView) {
+
+		contentsrepository.deleteByContentsId(contents.getContentsId());
+
+		modelAndView.addObject("message", "delete");
+
+		modelAndView.setViewName("redirect:/myPage");
 
 		return modelAndView;
 
