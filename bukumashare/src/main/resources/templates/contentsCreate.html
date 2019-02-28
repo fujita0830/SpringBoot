@@ -1,70 +1,83 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns="http://www.thymeleaf.org">
 <head>
- <meta charset="utf-8">
+<meta charset="utf-8">
 <title>ブックマーク登録</title>
 <!-- BootstrapのCSS読み込み -->
-    <link rel="stylesheet" media="all" th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.min.css}" />
+<link rel="stylesheet" media="all"
+	th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.min.css}" />
 <!-- jQuery読み込み -->
-    <script type="text/javascript" th:src="@{/webjars/jquery/1.11.3/jquery.min.js}"></script>
+<script type="text/javascript"
+	th:src="@{/webjars/jquery/1.11.3/jquery.min.js}"></script>
 <!-- BootstrapのJS読み込み -->
-    <script type="text/javascript" th:src="@{/webjars/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
+<script type="text/javascript"
+	th:src="@{/webjars/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
 </head>
 <body>
 
-<div th:replace="header"></div>
+	<div th:replace="header"></div>
 
 
-<div class="container" style="margin-top: 200px;">
-	<div class="row">
-            <div class="col-md-3 col-lg-3"></div>
-            <div class="col-md-6 col-lg-6">
-				<form method="post" action="/contentsCreate" th:object="${contentsCreate}">
-						<fieldset id="contents_create">
+	<div class="container" style="margin-top: 200px;">
+		<div class="row">
+			<div class="col-md-3 col-lg-3"></div>
+			<div class="col-md-6 col-lg-6">
+				<form method="post" action="/contentsCreate"
+					th:object="${contentsCreate}">
+					<fieldset id="contents_create">
 
-							<div class="form-group">
-								<div class="custom-control custom-radio custom-control-inline">
-									<input type="radio" id="customRadioInline1" name="readStatus" class="custom-control-input" checked="checked" value="0">
-									<label class="custom-control-label" for="customRadioInline1">後で読む</label>
-								</div>
-								<div class="custom-control custom-radio custom-control-inline">
-									<input type="radio" id="customRadioInline2" name="readStatus" class="custom-control-input" value="1">
-										<label class="custom-control-label" for="customRadioInline2">読み終わった</label>
-								</div>
+						<div class="form-group">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" id="customRadioInline1" name="readStatus"
+									class="custom-control-input" checked="checked" value="0">
+								<label class="custom-control-label" for="customRadioInline1">後で読む</label>
 							</div>
-							<div class="form-group">
-								<div class="custom-control custom-radio custom-control-inline">
-									<input type="radio" id="shareRadioInline1" name="shareStatus" class="share custom-control-input" checked="checked" value="0">
-									<label class="custom-control-label" for="shareRadioInline1">非公開</label>
-								</div>
-								<div class="custom-control custom-radio custom-control-inline">
-									<input type="radio" id="shareRadioInline2" name="shareStatus" class="share custom-control-input" value="1">
-										<label class="custom-control-label" for="shareRadioInline2">公開</label>
-								</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" id="customRadioInline2" name="readStatus"
+									class="custom-control-input" value="1"> <label
+									class="custom-control-label" for="customRadioInline2">読み終わった</label>
 							</div>
-							<div class="form-group">
-                                <label>タイトル</label>
-                                <input type="text" class="form-control" id="title" name="title" th:value="*{title}" placeholder="タイトルを入力してください"  />
-                            </div>
+						</div>
+						<div class="form-group">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" id="shareRadioInline1" name="shareStatus"
+									class="share custom-control-input" checked="checked" value="0">
+								<label class="custom-control-label" for="shareRadioInline1">非公開</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" id="shareRadioInline2" name="shareStatus"
+									class="share custom-control-input" value="1"> <label
+									class="custom-control-label" for="shareRadioInline2">公開</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<label>タイトル</label> <input type="text" class="form-control"
+								id="title" name="title" th:value="*{title}"
+								placeholder="タイトルを入力してください" />
+						</div>
 
-                            <div class="form-group">
-                                <label>URL</label>
-                                <input type="text" class="form-control" id="url" name="url" th:value="*{url}" placeholder="urlを入力してください" autofocus="" required="" />
-                                <div th:if="${#fields.hasErrors('url')}" th:errors="*{url}" class="alert alert-danger" role="alert" ></div>
-                            </div>
-                            <div class="form-group">
-                                <label>コメント</label>
-                                <input type="text" class="form-control" id="comment" name="comment" th:value="*{comment}" placeholder="コメントを入力してください"  />
-                            </div>
-                            <div class="form-group">
-                                <input id="create_button" type="submit" value="ブクマ登録" class="btn btn-primary" />
-                            </div>
-                        </fieldset>
+						<div class="form-group">
+							<label>URL</label> <input type="text" class="form-control"
+								id="url" name="url" th:value="*{url}" placeholder="urlを入力してください"
+								autofocus="" required="" />
+							<div th:if="${#fields.hasErrors('url')}" th:errors="*{url}"
+								class="alert alert-danger" role="alert"></div>
+						</div>
+						<div class="form-group">
+							<label>コメント</label> <input type="text" class="form-control"
+								id="comment" name="comment" th:value="*{comment}"
+								placeholder="コメントを入力してください" />
+						</div>
+						<div class="form-group">
+							<input id="create_button" type="submit" value="ブクマ登録"
+								class="btn btn-primary" />
+						</div>
+					</fieldset>
 				</form>
 			</div>
-        <div class="col-md-3 col-lg-3"></div>
+			<div class="col-md-3 col-lg-3"></div>
+		</div>
 	</div>
-</div>
 
 </body>
 </html>
