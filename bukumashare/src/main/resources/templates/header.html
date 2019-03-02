@@ -41,7 +41,11 @@
 								class="dropdown-item" href="#">Another action</a> <a
 								class="dropdown-item" href="#">Something else here</a>
 						</div></li>
+
 				</ul>
+
+				<div class=" navbar-brand border border-success" th:if="${session.loginFlg=='1'}"
+					th:text="${session.loginId}+'さんようこそ'"></div>
 				<form class="form-inline my-2 my-lg-0">
 					<input class="form-control mr-sm-2" type="text"
 						placeholder="Search" aria-label="Search">
