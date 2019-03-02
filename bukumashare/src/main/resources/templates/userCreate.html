@@ -24,6 +24,7 @@
 			<div class="col-md-6 col-lg-6">
 				<form method="post" action="/userCreate" th:object="${userCreate}">
 					<fieldset id="user_create">
+						<h1 class="display-4 font-italic text-primary">ユーザー登録</h1>
 						<div class="form-group">
 							<label>ログインID</label> <input type="text" class="form-control"
 								id="loginId" name="loginId" th:value="*{loginId}"

@@ -18,13 +18,15 @@
 	<div th:replace="header"></div>
 
 
-	<div class="container" style="margin-top: 200px;">
+	<div class="container" >
 		<div class="row">
 			<div class="col-md-3 col-lg-3"></div>
 			<div class="col-md-6 col-lg-6">
 				<form method="post" action="/contentsCreate"
 					th:object="${contentsCreate}">
 					<fieldset id="contents_create">
+
+						<h1 class="display-4 font-italic text-primary">ブックマーク登録</h1>
 
 						<div class="form-group">
 							<div class="custom-control custom-radio custom-control-inline">
@@ -53,7 +55,7 @@
 						<div class="form-group">
 							<label>タイトル</label> <input type="text" class="form-control"
 								id="title" name="title" th:value="*{title}"
-								placeholder="タイトルを入力してください" />
+								placeholder="タイトルを入力してください" autofocus="" required="" />
 						</div>
 
 						<div class="form-group">
