@@ -19,6 +19,8 @@
 	<div th:replace="header"></div>
 	<div class="container" th:with="page = ${contentsList}">
 
+		<h1 class="display-4 font-italic text-primary">みんなのブックマーク</h1>
+
 		<div th:each="obj:${contentsList}" style="margin-top: 30px;">
 
 			<form action="/contentsDetail" method="post">
@@ -36,7 +38,7 @@
 								<li class="list-group-item" th:text="'コメント:'+${obj.comment}"></li>
 							</ul>
 							<button type="submit" name="contentsId"
-								th:value="${obj.contentsId}" class="btn btn-primary">記事詳細</button>
+								th:value="${obj.contentsId}" class="btn btn-info">ブックマーク詳細</button>
 						</div>
 					</div>
 				</div>
@@ -46,22 +48,6 @@
 
 		<div th:replace="pagenation"></div>
 
-		<!-- <form action="/goLogin">
-<input type="submit" value="ログイン"  class="btn btn-primary">
-</form>
-
-<form action="/goUserCreate">
-<input type="submit" value="ユーザー登録"  class="btn btn-primary">
-</form>
-
-<form action="/myPage">
-<input type="submit" value="マイページ"  class="btn btn-primary">
-</form>
-
-<form action="/contents">
-<input type="submit" value="" class="btn btn-primary">
-</form>
- -->
 	</div>
 
 </body>

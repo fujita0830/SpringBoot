@@ -19,22 +19,22 @@
 
 	<div class="container" th:with="page = ${contentsList}">
 
+		<h1 class="display-4 font-italic text-primary">ブックマーク一覧</h1>
 
 		<form action="/myPage" th:with="page = ${contentsList}">
 
+			<button type="submit" class="btn btn-primary">一覧</button>
+
 			<button type="submit" name="readStatus" value="0"
-				class="btn btn-primary">未読</button>
+				class="btn btn-danger">未読</button>
 
 			<button type="submit" name="readStatus" value="1"
-				class="btn btn-primary">既読</button>
+				class="btn btn-success">既読</button>
 
-			<button type="submit" class="btn btn-primary">一覧</button>
 		</form>
-
 
 		<div th:if="${message=='delete'}" class="alert alert-success"
 			role="alert">記事の削除が完了しました</div>
-
 
 		<form action="/contentsDetail" method="post">
 
@@ -62,7 +62,7 @@
 								<li class="list-group-item" th:text="'コメント:'+${obj.comment}"></li>
 							</ul>
 							<button type="submit" name="contentsId"
-								th:value="${obj.contentsId}" class="btn btn-primary">記事詳細</button>
+								th:value="${obj.contentsId}" class="btn btn-info">ブックマーク詳細</button>
 						</div>
 					</div>
 				</div>
