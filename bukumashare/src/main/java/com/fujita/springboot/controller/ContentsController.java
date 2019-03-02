@@ -29,9 +29,9 @@ public class ContentsController {
 	public ModelAndView goUserCreate(@ModelAttribute("contentsCreate") Contents contents, ModelAndView modelAndView) {
 
 		if ((String) session.getAttribute("loginFlg") == "1") {
-			modelAndView.setViewName("/contentsCreate");
+			modelAndView.setViewName("contentsCreate");
 		} else {
-			modelAndView.setViewName("redirect:/goLogin");
+			modelAndView.setViewName("redirect:goLogin");
 		}
 
 		return modelAndView;
@@ -48,13 +48,13 @@ public class ContentsController {
 				contents.setAccountId(account.getId());
 				contents.setLoginId(account.getLoginId());
 				contentsrepository.saveAndFlush(contents);
-				modelAndView.setViewName("redirect:/myPage");
+				modelAndView.setViewName("redirect:myPage");
 			} else {
-				modelAndView.setViewName("/contentsCreate");
+				modelAndView.setViewName("contentsCreate");
 			}
 
 		} else {
-			modelAndView.setViewName("redirect:/goLogin");
+			modelAndView.setViewName("redirect:goLogin");
 		}
 		return modelAndView;
 	}
@@ -66,13 +66,13 @@ public class ContentsController {
 
 		if ((String) session.getAttribute("loginFlg") == "1") {
 			modelAndView.addObject("contents", contents);
-			modelAndView.setViewName("/contentsDetail");
+			modelAndView.setViewName("contentsDetail");
 		} else if (Integer.parseInt(contents.getShareStatus()) == 1) {
 			modelAndView.addObject("contents", contents);
-			modelAndView.setViewName("/contentsDetail");
+			modelAndView.setViewName("contentsDetail");
 
 		} else {
-			modelAndView.setViewName("redirect:/goLogin");
+			modelAndView.setViewName("redirect:goLogin");
 		}
 
 		return modelAndView;
@@ -94,7 +94,7 @@ public class ContentsController {
 
 		modelAndView.addObject("contents", contents);
 		modelAndView.addObject("message", "success");
-		modelAndView.setViewName("/contentsDetail");
+		modelAndView.setViewName("contentsDetail");
 
 		return modelAndView;
 
@@ -108,7 +108,7 @@ public class ContentsController {
 
 		modelAndView.addObject("message", "delete");
 
-		modelAndView.setViewName("redirect:/myPage");
+		modelAndView.setViewName("redirect:myPage");
 
 		return modelAndView;
 

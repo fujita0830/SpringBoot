@@ -34,13 +34,13 @@ public class AccountController {
 
 	@RequestMapping(value = "/")
 	public ModelAndView top(ModelAndView modelAndView) {
-		modelAndView.setViewName("/top");
+		modelAndView.setViewName("top");
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView modelAndView, @PageableDefault(size = 3) Pageable pageable) {
-		modelAndView.setViewName("/index");
+		modelAndView.setViewName("index");
 		Page<Contents> contentsList = contentsrepository.findByshareStatusOrderByInsertDateDesc("1", pageable);
 		modelAndView.addObject("contentsList", contentsList);
 		return modelAndView;
@@ -50,9 +50,9 @@ public class AccountController {
 	public ModelAndView gologin(@ModelAttribute("loginForm") Account account, ModelAndView modelAndView) {
 
 		if ((String) session.getAttribute("loginFlg") == "1") {
-			modelAndView.setViewName("/myPage");
+			modelAndView.setViewName("myPage");
 		}
-		modelAndView.setViewName("/login");
+		modelAndView.setViewName("login");
 		return modelAndView;
 	}
 
@@ -72,15 +72,15 @@ public class AccountController {
 				session.setAttribute("id", account.getId());
 				session.setAttribute("loginFlg", account.getLoginFlg());
 
-				modelAndView.setViewName("redirect:/myPage");
+				modelAndView.setViewName("redirect:myPage");
 			} else {
 
 				modelAndView.addObject("ErrorMessage", "existsLoginIdAndLoginPassword");
-				modelAndView.setViewName("/login");
+				modelAndView.setViewName("login");
 			}
 
 		} else {
-			modelAndView.setViewName("/login");
+			modelAndView.setViewName("login");
 		}
 		return modelAndView;
 	}
@@ -93,16 +93,16 @@ public class AccountController {
 			account.setLoginFlg("0");
 			accountrepository.saveAndFlush(account);
 			session.invalidate();
-			modelAndView.setViewName("/top");
+			modelAndView.setViewName("top");
 		} else {
-			modelAndView.setViewName("redirect:/goLogin");
+			modelAndView.setViewName("redirect:goLogin");
 		}
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "/goUserCreate")
 	public ModelAndView gouserCreate(@ModelAttribute("userCreate") Account account, ModelAndView modelAndView) {
-		modelAndView.setViewName("/userCreate");
+		modelAndView.setViewName("userCreate");
 		return modelAndView;
 	}
 
@@ -113,14 +113,14 @@ public class AccountController {
 
 			if (accountrepository.existsByLoginId(account.getLoginId())) {
 				modelAndView.addObject("ErrorMessage", "existsLoginId");
-				modelAndView.setViewName("/userCreate");
+				modelAndView.setViewName("userCreate");
 			} else {
 				accountrepository.saveAndFlush(account);
-				modelAndView.setViewName("redirect:/");
+				modelAndView.setViewName("top");
 			}
 
 		} else {
-			modelAndView.setViewName("/userCreate");
+			modelAndView.setViewName("userCreate");
 		}
 		return modelAndView;
 	}
@@ -138,25 +138,25 @@ public class AccountController {
 				Page<Contents> contentsList = contentsrepository.findByAccountIdAndReadStatusOrderByInsertDateDesc(
 						account.getId(), contents.getReadStatus(), pageable);
 				modelAndView.addObject("contentsList", contentsList);
-				modelAndView.setViewName("/myPage");
+				modelAndView.setViewName("myPage");
 
 			} else if (!(contents.getReadStatus() == null) && Integer.parseInt(contents.getReadStatus()) == 1) {
 				account = (Account) (session.getAttribute("account"));
 				Page<Contents> contentsList = contentsrepository.findByAccountIdAndReadStatusOrderByInsertDateDesc(
 						account.getId(), contents.getReadStatus(), pageable);
 				modelAndView.addObject("contentsList", contentsList);
-				modelAndView.setViewName("/myPage");
+				modelAndView.setViewName("myPage");
 			} else {
 
 				account = (Account) (session.getAttribute("account"));
 				Page<Contents> contentsList = contentsrepository.findByAccountIdOrderByInsertDateDesc(account.getId(),
 						pageable);
 				modelAndView.addObject("contentsList", contentsList);
-				modelAndView.setViewName("/myPage");
+				modelAndView.setViewName("myPage");
 			}
 
 		} else {
-			modelAndView.setViewName("redirect:/goLogin");
+			modelAndView.setViewName("redirect:goLogin");
 		}
 
 		return modelAndView;
