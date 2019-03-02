@@ -1,0 +1,1 @@
+web: java -Dserver.port=$PORT -jar target/*.jar --server.port=$PORT --spring.profiles.active=heroku --spring.datasource.username=$DB_USERNAME --spring.datasource.password=$DB_PASSWORD --spring.datasource.url=$DB_SETTING_URL
