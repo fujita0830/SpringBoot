@@ -9,6 +9,9 @@
 - 開発言語
   - Java
 
+- プロジェクト管理ツール
+  - Maven
+  
 - 使用フレームワーク
   - Java/SpringBoot
   - css/BootStrap
