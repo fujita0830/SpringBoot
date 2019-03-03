@@ -2,7 +2,7 @@
 <html lang="ja" xmlns="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
-<title>ホーム画面</title>
+<title>みんなのブックマーク</title>
 
 <!-- BootstrapのCSS読み込み -->
 <link rel="stylesheet" media="all"
@@ -38,7 +38,7 @@
 								<li class="list-group-item" th:text="'コメント:'+${obj.comment}"></li>
 							</ul>
 							<button type="submit" name="contentsId"
-								th:value="${obj.contentsId}" class="btn btn-info">ブックマーク詳細</button>
+								th:value="${obj.contentsId}" class="btn btn-success">ブックマーク詳細</button>
 						</div>
 					</div>
 				</div>

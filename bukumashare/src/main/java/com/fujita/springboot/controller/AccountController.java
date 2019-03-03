@@ -70,6 +70,7 @@ public class AccountController {
 				accountrepository.saveAndFlush(account);
 				session.setAttribute("account", account);
 				session.setAttribute("id", account.getId());
+				session.setAttribute("loginId", account.getLoginId());
 				session.setAttribute("loginFlg", account.getLoginFlg());
 
 				modelAndView.setViewName("redirect:myPage");
