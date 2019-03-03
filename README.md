@@ -9,7 +9,7 @@
 - 開発言語
   - Java
 
-- 利用フレームワーク
+- 使用フレームワーク
   - Java/SpringBoot
   - css/BootStrap
   - MySQL/Hibernate(Spring Data JPA)
