@@ -25,8 +25,8 @@
 			<form action="/contentsEdit" method="post" 　th:object="${contents}">
 				<div class="card mb-10 box-shadow">
 
-					<a href="" th:href="@{*{url}}" class="card-header"
-						　th:text="*{title}"></a>
+					<a href="" th:href="@{*{url}}" target="_blank" class="card-header"
+						th:text="*{title}"></a>
 					<h4 class="my-0 font-weight-normal"></h4>
 					<div class="card-body">
 
@@ -74,9 +74,9 @@
 				</div>
 			</form>
 			<form action="/contentsDelete" method="post" th:object="${contents}">
-				<button th:if="${session.loginFlg=='1'}" type="submit" style="margin-top: 80px;"
-					name="contentsId" th:value="*{contentsId}"
-					class="float-right btn btn-danger">ブックマーク削除</button>
+				<button th:if="${session.loginFlg=='1'}" type="submit"
+					style="margin-top: 80px;" name="contentsId"
+					th:value="*{contentsId}" class="float-right btn btn-danger">ブックマーク削除</button>
 			</form>
 		</div>
 	</div>
