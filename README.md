@@ -1,4 +1,4 @@
-# bukumashare
+# BukumaShare
 個人製作したポートフォリオです。
 
 - 概要
