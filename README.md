@@ -21,6 +21,9 @@
   - Thymeleaf,HTML
   - css/Bootstrap
 
+- サーバー
+  - Heroku
+
 ## 実装機能
 
 【未ログイン時でも利用可】
