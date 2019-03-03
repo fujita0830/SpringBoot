@@ -60,7 +60,7 @@ public class ContentsController {
 	}
 
 	@RequestMapping(value = "/contentsDetail")
-	public ModelAndView contents(@ModelAttribute Contents contents, ModelAndView modelAndView) {
+	public ModelAndView contentsDetail(@ModelAttribute Contents contents, ModelAndView modelAndView) {
 
 		contents = contentsrepository.findByContentsId(contents.getContentsId());
 
@@ -78,6 +78,27 @@ public class ContentsController {
 		return modelAndView;
 	}
 
+	@RequestMapping(value = "/contentsDetailMyPage")
+	public ModelAndView contentsDetailMyPage(@ModelAttribute Contents contents, ModelAndView modelAndView) {
+
+		contents = contentsrepository.findByContentsId(contents.getContentsId());
+
+		if ((String) session.getAttribute("loginFlg") == "1") {
+			modelAndView.addObject("contents", contents);
+			modelAndView.setViewName("contentsDetailMyPage");
+		} else if (Integer.parseInt(contents.getShareStatus()) == 1) {
+			modelAndView.addObject("contents", contents);
+			modelAndView.setViewName("contentsDetailMyPage");
+
+		} else {
+			modelAndView.setViewName("redirect:goLogin");
+		}
+
+		return modelAndView;
+	}
+
+
+
 	@RequestMapping(value = "/contentsEdit")
 	@Transactional(readOnly = false)
 	public ModelAndView contentsEdit(@ModelAttribute Contents contents, ModelAndView modelAndView) {
@@ -94,7 +115,7 @@ public class ContentsController {
 
 		modelAndView.addObject("contents", contents);
 		modelAndView.addObject("message", "success");
-		modelAndView.setViewName("contentsDetail");
+		modelAndView.setViewName("contentsDetailMyPage");
 
 		return modelAndView;
 

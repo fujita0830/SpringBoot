@@ -22,7 +22,7 @@
 		<div class="col-md-10">
 			<div th:if="${message=='success'}" class="alert alert-success"
 				role="alert">変更が完了しました</div>
-			<form 　th:object="${contents}">
+			<form action="/contentsEdit" method="post" 　th:object="${contents}">
 				<div class="card mb-10 box-shadow">
 
 					<a href="" th:href="@{*{url}}" target="_blank" class="card-header"
@@ -67,11 +67,17 @@
 							</li>
 							<li class="list-group-item" th:text="'コメント:'+*{comment}"></li>
 						</ul>
-
+						<button th:if="${session.loginFlg=='1'}" type="submit"
+							name="contentsId" th:value="*{contentsId}"
+							class="btn btn-primary">ステータス変更</button>
 					</div>
 				</div>
 			</form>
-
+			<form action="/contentsDelete" method="post" th:object="${contents}">
+				<button th:if="${session.loginFlg=='1'}" type="submit"
+					style="margin-top: 80px;" name="contentsId"
+					th:value="*{contentsId}" class="float-right btn btn-danger">ブックマーク削除</button>
+			</form>
 		</div>
 	</div>
 
